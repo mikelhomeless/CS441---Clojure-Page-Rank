@@ -32,5 +32,6 @@
 
 (doseq [x '(1 2 4 8 16 32 64)]
   (println (str "Running on " x " threads..."))
-  ; (println (str "Time: " (time (dotimes [_ 1000] (doall (utils/my-pmap #(map update-pagerank %) 1 pageranks))))))
-(time (dotimes [_ 1000] (doall (utils/my-pmap #(doall (map update-pagerank %)) x pageranks)))))
+(time (dotimes [_ 1000] (doall (utils/map-pool #(doall (map update-pagerank %)) x pageranks)))))
+
+(println pageranks)
